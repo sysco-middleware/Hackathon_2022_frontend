@@ -28,34 +28,14 @@
         </v-img>
 
         <v-card-text>
-          <table class="table">
-            <thead>
-            <tr>
-              <td>Title</td>
-              <td>Description</td>
-              <td></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(item, index) in items" :key="item.title">
-              <td><input type="text" id="title" class="form-control" v-model="item.title"></td>
-              <td><input type="text" class="form-control" v-model="item.description"></td>
-              <td>
-                <a class="btn btn-success" v-on:click="addItem" v-if="items.length - 1 <= index" v-bind:class="{ disabled: item.title.length == 0 || item.description.length == 0 }">Add</a>
-                <a class="btn btn-danger" v-on:click="removeItem(index);" v-if="(items.length - 1 >= index) && (items.length -1 != index)">Remove</a>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+          <div v-for="(item) in messages" :key="item.title">
+            <span >
+              {{item.description}}
+            </span>
+            </div>
+            <!-- list of messages goes here -->
         </v-card-text>
         <v-row>
-<v-col class="col-10">
-        <v-text-field
-            align-center
-            v-model="items.description"
-            label="Regular"
-        ></v-text-field>
-</v-col>
           <v-col class="col-2">
         <v-btn
             class="mx-2"
@@ -79,8 +59,13 @@ export default {
   name: "Chat",
   data() {
     return{
-      items: [
+      singleMessage: {
+        id:"",
+        text:"",
+      },
+      messages: [
         {
+          id:'',
           title: '',
           description: ''
         }
@@ -89,15 +74,25 @@ export default {
   },
   methods: {
     addItem: function() {
-      this.items.push({
+      this.messages.push({
         title: '',
         description: '',
       });
+      // eslint-disable-next-line no-console
+      console.log(this.messages)
     },
     removeItem: function(index) {
-      this.items.splice(index, 1);
-    }
-  }
+      this.messages.splice(index, 1);
+    },
+    submitForm() {
+      // eslint-disable-next-line no-console
+      console.log("test", this.messages)
+      this.messages.push(this.singleMessage);
+      // eslint-disable-next-line no-console
+      console.log("test", this.messages)
+
+    },
+  },
 };
 </script>
 
