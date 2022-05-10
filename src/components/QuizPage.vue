@@ -23,7 +23,7 @@
           <v-row>
             <v-col class="col-8">
           <iframe
-              src="https://player.twitch.tv/loltyler1"
+              src="https://player.twitch.tv/moonunit666"
               height="600"
               width="775"
               allowfullscreen>
@@ -58,8 +58,8 @@ export default {
     return{
       question:
         {
-          number: 1,
-          whichButton:"",
+          scene: "scene-1",
+          answer:"",
         }
     }
   },
@@ -73,12 +73,14 @@ export default {
     },
 
     clickButton: function(item) {
-      this.question.whichButton = item.target.outerText.toLowerCase()
+      this.question.answer = item.target.outerText
       this.postRequest()
     },
 
     postRequest: function() {
       const data = this.question;
+      // eslint-disable-next-line no-console
+      console.log(JSON.stringify(data))
 
       fetch('https://twitchcommandreceiver.azurewebsites.net/sendAction', {
         method: 'POST', // or 'PUT'
@@ -105,7 +107,11 @@ export default {
 
 <style scoped>
 .button{
-width: 150px;
-  height: 25px;
+width: 50%;
+  height: 50px;
+}
+.header{
+  font-size: 28px;
+  font-weight: bold;
 }
 </style>
