@@ -10,48 +10,41 @@
               flat
               color="rgba(0, 0, 0, 0)"
           >
-            <v-app-bar-nav-icon color="white"></v-app-bar-nav-icon>
 
             <v-toolbar-title class="text-h6 white--text pl-0">
              Cegal Twitch Stream
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
-
-            <v-btn
-                color="white"
-                icon
-            >
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
           </v-app-bar>
         </v-img>
 
         <v-card-text>
           <v-row>
-            <v-col class="col-6">
+            <v-col class="col-8">
           <iframe
               src="https://player.twitch.tv/loltyler1"
               height="600"
-              width="800"
+              width="775"
               allowfullscreen>
           </iframe>
             </v-col>
+            <v-col>
+              <v-btn class="button" depressed color="#E0C2F2"  @click="clickButton($event)">
+                A
+              </v-btn>
+              <v-btn
+                  depressed
+                  color="#3F1651"
+                  class="white--text button"
+                  @click="clickButton($event)"
+              >
+               B
+              </v-btn>
+            </v-col>
           </v-row>
         </v-card-text>
-        <v-row>
-          <v-col class="col-2">
-        <v-btn
-            class="mx-2"
-            dark
-            large
-            color="purple"
-            @click="addItem"
-        >
-          Send
-        </v-btn>
-          </v-col>
-        </v-row>
+
       </v-card>
     </v-row>
   </v-container>
@@ -63,44 +56,56 @@ export default {
   name: "Chat",
   data() {
     return{
-      singleMessage: {
-        id:"",
-        text:"",
-      },
-      messages: [
+      question:
         {
-          id:'',
-          title: '',
-          description: ''
+          number: 1,
+          whichButton:"",
         }
-      ]
     }
   },
   methods: {
-    addItem: function() {
-      this.messages.push({
-        title: '',
-        description: '',
-      });
-      // eslint-disable-next-line no-console
-      console.log(this.messages)
+    fetchSomething: function(){
+      //example of a get
+      fetch('https://ghibliapi.herokuapp.com/films')
+          .then(response => response.json())
+          // eslint-disable-next-line no-console
+          .then(data => console.log(data));
     },
-    removeItem: function(index) {
-      this.messages.splice(index, 1);
-    },
-    submitForm() {
-      // eslint-disable-next-line no-console
-      console.log("test", this.messages)
-      this.messages.push(this.singleMessage);
-      // eslint-disable-next-line no-console
-      console.log("test", this.messages)
 
+    clickButton: function(item) {
+      this.question.whichButton = item.target.outerText.toLowerCase()
+      this.postRequest()
     },
+
+    postRequest: function() {
+      const data = this.question;
+
+      fetch('https://twitchcommandreceiver.azurewebsites.net/sendAction', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+          .then(response => response.json())
+          .then(data => {
+            // eslint-disable-next-line no-console
+            console.log('Success:', data);
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.error('Error:', error);
+          });
+    }
+
   },
 };
 </script>
 
 
 <style scoped>
-
+.button{
+width: 150px;
+  height: 25px;
+}
 </style>
