@@ -29,4 +29,5 @@ export default {
 .background{
   background-color: black;
 }
+
 </style>
