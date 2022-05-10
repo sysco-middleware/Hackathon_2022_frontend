@@ -12,7 +12,7 @@
 
 <script>
 import MainPage from './components/MainPage';
-import Chat from './components/Chat';
+import Chat from './components/QuizPage';
 
 export default {
   name: 'App',
