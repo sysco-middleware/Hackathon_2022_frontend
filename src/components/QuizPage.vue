@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="space-around">
-      <v-card width="100%">
+      <v-card width="100%" color="#E6E1EF">
         <v-img
             height="100px"
             src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2113&q=80"
@@ -10,26 +10,31 @@
               flat
               color="rgba(0, 0, 0, 0)"
           >
-
-            <v-toolbar-title class="text-h6 white--text pl-0">
-             Cegal Twitch Stream
-            </v-toolbar-title>
-
+              <div class="mainTitle">Cegal Twitch Stream</div>
             <v-spacer></v-spacer>
           </v-app-bar>
         </v-img>
 
         <v-card-text>
-          <v-row>
+          <v-row class="side1">
             <v-col class="col-8">
           <iframe
-              src="https://player.twitch.tv/moonunit666"
-              height="600"
+              src="https://player.twitch.tv/moonunit666&parent=https://twitchhackathonfrontend.azurewebsites.net/"
+              height="660"
               width="775"
               allowfullscreen>
           </iframe>
             </v-col>
-            <v-col>
+            <v-col class="col-4">
+              <h2 class="otherFont">This stream powered by:</h2>
+
+              <img src="../cegalLogo.png" alt="Logo" width="100%" height="15%">
+              <br>
+              <h2 class="otherFont">...And this yeti! </h2>
+
+              <img src="../yeti.jpg" alt="Logo" width="100%" height="45%">
+              <br>
+              <h2 class="otherFont">Please answer by clicking the following buttons:</h2>
               <v-btn class="button" depressed color="#E0C2F2"  @click="clickButton($event)">
                 A
               </v-btn>
@@ -44,7 +49,6 @@
             </v-col>
           </v-row>
         </v-card-text>
-
       </v-card>
     </v-row>
   </v-container>
@@ -58,7 +62,7 @@ export default {
     return{
       question:
         {
-          scene: "scene-1",
+          scene: "StartStream",
           answer:"",
         }
     }
@@ -79,8 +83,6 @@ export default {
 
     postRequest: function() {
       const data = this.question;
-      // eslint-disable-next-line no-console
-      console.log(JSON.stringify(data))
 
       fetch('https://twitchcommandreceiver.azurewebsites.net/sendAction', {
         method: 'POST', // or 'PUT'
@@ -106,12 +108,24 @@ export default {
 
 
 <style scoped>
-.button{
-width: 50%;
-  height: 50px;
+button{
+  width: 50%;
+  min-height: 60px;
+  max-height: 60px;
 }
-.header{
-  font-size: 28px;
+.mainTitle{
+font-size: 50px;
+  color: white ;
+  font-family: "Papyrus", Times, serif;
+  margin-left: 40%;
+  margin-top: 5%;
   font-weight: bold;
+}
+.otherFont{
+  font-family: "Papyrus", Times, serif;
+  padding:10px;
+}
+.v-application .text-h6 {
+  margin-left: 40%;
 }
 </style>
