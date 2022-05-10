@@ -28,12 +28,16 @@
         </v-img>
 
         <v-card-text>
-          <div v-for="(item) in messages" :key="item.title">
-            <span >
-              {{item.description}}
-            </span>
-            </div>
-            <!-- list of messages goes here -->
+          <v-row>
+            <v-col class="col-6">
+          <iframe
+              src="https://player.twitch.tv/loltyler1"
+              height="600"
+              width="800"
+              allowfullscreen>
+          </iframe>
+            </v-col>
+          </v-row>
         </v-card-text>
         <v-row>
           <v-col class="col-2">

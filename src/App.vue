@@ -1,13 +1,6 @@
 <template>
   <v-app>
     <div class="background">
-    <v-app-bar
-      app
-      color="#3F1651"
-      dark
-    >
-
-    </v-app-bar>
       <br>
     <v-main>
       <MainPage/>
