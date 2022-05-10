@@ -12,6 +12,7 @@
           >
 
             <v-toolbar-title class="text-h6 white--text pl-0">
+              <img src="https://www.w3schools.com/images/picture.jpg" alt="Logo">
              Cegal Twitch Stream
             </v-toolbar-title>
 
@@ -23,7 +24,7 @@
           <v-row>
             <v-col class="col-8">
           <iframe
-              src="https://player.twitch.tv/moonunit666"
+              src="https://player.twitch.tv/moonunit666&parent=https://twitchhackathonfrontend.azurewebsites.net/"
               height="600"
               width="775"
               allowfullscreen>
@@ -44,7 +45,6 @@
             </v-col>
           </v-row>
         </v-card-text>
-
       </v-card>
     </v-row>
   </v-container>
@@ -56,9 +56,10 @@ export default {
   name: "Chat",
   data() {
     return{
+
       question:
         {
-          scene: "scene-1",
+          scene: "StartStream",
           answer:"",
         }
     }
